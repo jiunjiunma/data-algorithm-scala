@@ -1,19 +1,19 @@
 package com.dataalgorithm.ch1
 
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkContext, SparkConf}
 
 /**
+ * Levelage Spark's new (1.2.1) sortByKey to do secondary sort.
  *
  * @author jma
  */
-object SecondarySort {
+object SecondarySort1 {
   def main(args: Array[String]): Unit = {
-    // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch1.SecondarySort"
+    // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch1.SecondarySort1"
     // --master local[2] target/scala-2.11/data-algorithm-scala-assembly-1.0.jar
     // file:///Users/jma/work/data-algorithm-scala/data/ch1/sample_input.txt
     if (args.length < 1) {
-      System.err.println(s"Usage: SecondarySort <path>")
+      System.err.println(s"Usage: SecondarySort1 <path>")
       System.exit(1)
     }
     // path = "file:///Users/jma/work/data-algorithm-scala/data/ch1/sample_input.txt"
@@ -26,12 +26,12 @@ object SecondarySort {
       val year = tokens(0)
       val month = tokens(1)
       val temperature = tokens(3)
-      (year + "-" + month, temperature.toInt)
-    }.groupByKey().mapValues(it => it.toSeq.sorted)
+      ((year + "-" + month, temperature.toInt), temperature)
+    }.sortByKey(true, 1) //groupByKey().mapValues(it => it.toSeq.sorted)
 
 
     groupedRDD.collect().foreach {
-      case (key, seq) => println(key + ": " + seq.mkString(","))
+      case (key, seq) => println(key)
     }
 
   }
