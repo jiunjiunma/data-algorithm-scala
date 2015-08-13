@@ -1,19 +1,19 @@
-package com.dataalgorithm.ch1
+package com.dataalgorithm.ch2
 
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Levelage Spark's new (1.2.1) sortByKey to do secondary sort.
  *
  * @author jma
  */
-object SecondarySort1 {
+object SecondarySort {
   def main(args: Array[String]): Unit = {
-    // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch1.SecondarySort1"
+    // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch2.SecondarySort"
     // --master local[2] target/scala-2.11/data-algorithm-scala-assembly-1.0.jar
     // file:///Users/jma/work/data-algorithm-scala/data/ch1/sample_input.txt
     if (args.length < 1) {
-      System.err.println(s"Usage: SecondarySort1 <path>")
+      System.err.println(s"Usage: SecondarySort <path>")
       System.exit(1)
     }
     // path = "file:///Users/jma/work/data-algorithm-scala/data/ch1/sample_input.txt"
