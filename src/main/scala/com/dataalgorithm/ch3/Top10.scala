@@ -19,7 +19,7 @@ object Top10 {
       System.exit(1)
     }
     val path = args(0)
-    val conf = new SparkConf().setAppName("SecondarySort")
+    val conf = new SparkConf().setAppName("Top10")
     val sc = new SparkContext(conf)
     val linesRDD = sc.textFile(path, 1)
     val mappedRDD = linesRDD.map { line =>
