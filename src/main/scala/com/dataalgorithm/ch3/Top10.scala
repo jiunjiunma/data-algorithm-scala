@@ -9,6 +9,7 @@ import org.apache.spark.{SparkContext, SparkConf}
  */
 object Top10 {
   implicit val pairCompare = Ordering.by[(String, Int), Int](_._2)
+  //implicit val pairCompareOrdered = Ordering.by[(String, Int), Int](-_._2)
 
   def main(args: Array[String]): Unit = {
     // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch3.Top10"
@@ -27,6 +28,8 @@ object Top10 {
       (words(0), words(1).toInt)
     }.reduceByKey(_+_)
 
+    // takeOrdered is taking ascending order so need to use pairCompareOrdered
+    // mappedRDD.takeOrdered(10)(pairCompareOrdered).foreach(println)
     mappedRDD.top(10).foreach(println)
 
     // output
