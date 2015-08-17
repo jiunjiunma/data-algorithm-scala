@@ -1,6 +1,7 @@
 package com.dataalgorithm.ch3
 
 import scala.collection.mutable
+import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.{SparkContext, SparkConf}
 
 /**
@@ -23,22 +24,25 @@ object Top10UsePartition {
     val conf = new SparkConf().setAppName("Top10UsePartition")
     val sc = new SparkContext(conf)
     val linesRDD = sc.textFile(path, 1)
+    val topN = 10
+    val broadcast = sc.broadcast(topN)
+
     val partitionRDD = linesRDD.mapPartitions { iter =>
       val top10 = new mutable.PriorityQueue[(String, Int)]()
+      val topCount = broadcast.value
       iter.foreach { line =>
         val words = line.split("\\s")
         val datum = (words(0), words(1).toInt)
         top10.enqueue(datum)
-        if (top10.size > 10) top10.dequeue()
+        if (top10.size > topCount) top10.dequeue()
       }
       top10.iterator
     }
 
     val finalTop10 = new mutable.PriorityQueue[(String, Int)]()
-
     partitionRDD.collect().foreach { datum =>
       finalTop10.enqueue(datum)
-      if (finalTop10.size > 10) finalTop10.dequeue()
+      if (finalTop10.size > topN) finalTop10.dequeue()
     }
 
     finalTop10.foreach(println)
