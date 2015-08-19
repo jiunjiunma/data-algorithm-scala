@@ -1,7 +1,5 @@
 package com.dataalgorithm.ch6
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
  *
  * @author jma
