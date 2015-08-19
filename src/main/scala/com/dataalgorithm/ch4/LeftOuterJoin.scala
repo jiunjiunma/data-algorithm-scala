@@ -9,7 +9,7 @@ import org.apache.spark.{SparkContext, SparkConf}
 object LeftOuterJoin {
   def main(args: Array[String]): Unit = {
     // $SPARK_HOME/bin/spark-submit --class "com.dataalgorithm.ch4.LeftOuterJoin"
-    // --master local[2] target/scala-2.11/data-algorithm-scala-assembly-1.0.jar
+    // --master local[2] target/scala-2.10/data-algorithm-scala-assembly-1.0.jar
     // file:///Users/jma/work/data-algorithm-scala/data/ch4/users.txt
     // file:///Users/jma/work/data-algorithm-scala/data/ch4/transactions.txt
     if (args.length != 2) {

@@ -2,7 +2,7 @@ name := """data-algorithm-scala"""
 
 version := "1.0"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.10.5"
 
 scalacOptions in ThisBuild += "-language:postfixOps"
 
@@ -20,7 +20,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming-kinesis-asl" % sparkVersion excludeAll(
     ExclusionRule("com.amazonaws", "aws-java-sdk"),
     ExclusionRule("org.spark-project.spark"),
-    ExclusionRule("org.apache.spark", "spark-streaming_2.11"),
+    ExclusionRule("org.apache.spark", "spark-streaming_2.10"),
     ExclusionRule("com.fasterxml.jackson.core"),
     ExclusionRule("org.apache.httpcomponents", "httpclient"),
     ExclusionRule("commons-logging"),
